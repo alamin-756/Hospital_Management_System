@@ -6,12 +6,12 @@ import java.util.Scanner;
 import static java.lang.Class.forName;
 
 public class HospitalManagementSystem {
-    private static final String url = "";
+    private static final String url = "jdbc:mysql://localhost:3306/hospital";
     private static final String username ="root";
     private  static final String password = "@l@min325";
     public static void main(String[] args){
         try{
-            class.forName( "com.mysql.cj.jdbc.Driver");
+            Class.forName( "com.mysql.cj.jdbc.Driver");
 
         }catch (ClassNotFoundException e){
             e.printStackTrace();
@@ -35,21 +35,25 @@ public class HospitalManagementSystem {
                     //Add patient
                     patient.addPatient();
                     System.out.println();
+                    break;
 
                 case 2:
                     //view Patient
                     patient.viewPatients();
                     System.out.println();
+                    break;
 
                 case 3:
                     //view Doctors
                     doctor.viewDoctors();
                     System.out.println();
+                    break;
 
                 case 4:
                     //Book Appointment
                     bookAppointment(patient,doctor,connection,scanner);
                     System.out.println();
+                    break;
 
 
                 case 5:
@@ -101,7 +105,7 @@ public class HospitalManagementSystem {
 
     }
     public static boolean checkDoctorAvailability(int doctorid,String appointmentDate,Connection connection){
-        String query = "SELECT COUNT(*) FROM appointments WHERE doctor_id = ? AND appointmetn_date = ?)";
+        String query = "SELECT COUNT(*) FROM appointments WHERE doctor_id = ? AND appointment_date = ?)";
         try {
             PreparedStatement preparedStatement= connection.prepareStatement(query);
             preparedStatement.setInt(1,doctorid);
